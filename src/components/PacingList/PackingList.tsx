@@ -1,5 +1,5 @@
+import { Item } from './Item/Item'; // Убедитесь, что путь правильный
 import '../../App.css';
-import { Item } from './Item/Item';
 
 type ItemType = {
     id: number;
