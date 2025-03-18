@@ -1,22 +1,58 @@
-import './App.css';
-import { Logo } from './components/Logo/Logo';
-import { Stats } from './components/Stats/Stats';
-import { Form } from './components/Form/Form';
-import {PackingList} from "./components/PacingList/PackingList";
+import Logo from "./components/Logo/Logo";
+import {useState} from "react";
+import Form from "./components/Form/Form";
+import PackingList from "./components/PacingList/PackingList";
+import Stats from "./components/Stats/Stats";
 
-const initialItems = [
-    { id: 1, description: 'Passports', quantity: 2, packed: false },
-    { id: 2, description: 'Socks', quantity: 12, packed: true },
-    { id: 3, description: 'Charger', quantity: 1, packed: false },
-];
+interface Item {
+    id: number;
+    description: string;
+    quantity: number;
+    packed: boolean;
+}
 
 function App() {
+    const [items, setItems] = useState<Item[]>([]);
+
+    function deleteItem(id: number) {
+        setItems((items) => items.filter((ele) => ele.id !== id));
+    }
+
+    function onAddItems(newItem: Item) {
+        setItems((items) => [...items, newItem]);
+    }
+
+    function handleToggleItem(id: number) {
+        setItems((items) =>
+            items.map((ele) =>
+                ele.id === id
+                    ? {
+                        ...ele,
+                        packed: !ele.packed,
+                    }
+                    : { ...ele }
+            )
+        );
+    }
+
+    function handleDelete() {
+        const confirmation = window.confirm(
+            "Are you sure you want to delete all items?"
+        );
+        if (confirmation) setItems([]);
+    }
+
     return (
-        <div className="App">
+        <div className="app">
             <Logo />
-            <Form />
-            <PackingList items={initialItems} /> {/* Передаём initialItems в PackingList */}
-            <Stats />
+            <Form onAddItems={onAddItems} />
+            <PackingList
+                items={items}
+                deleteItem={deleteItem}
+                handleToggleItem={handleToggleItem}
+                deleteAll={handleDelete}
+            />
+            <Stats items={items} />
         </div>
     );
 }

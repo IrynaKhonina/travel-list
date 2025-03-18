@@ -1,9 +1,5 @@
-type Props = {};
-export const Logo = (props: Props) => {
-    return (
+import React from "react";
 
-        <h1>🌴FarAway💼</h1>
-
-)
-    ;
-};
+export default function Logo() {
+    return <h1>🌴 Far Away 💼</h1>;
+}
