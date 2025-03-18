@@ -1,8 +1,8 @@
+import { useState } from "react";
 import Logo from "./components/Logo/Logo";
-import {useState} from "react";
 import Form from "./components/Form/Form";
-import PackingList from "./components/PacingList/PackingList";
 import Stats from "./components/Stats/Stats";
+import PackingList from "./components/PacingList/PackingList";
 
 interface Item {
     id: number;

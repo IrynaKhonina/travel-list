@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Item from "../Items/Items";
 
-
 interface PackingListProps {
     items: {
         id: number;
